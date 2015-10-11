@@ -7,11 +7,18 @@ import java.util.ArrayList;
 public class Complex {
 
     public static void main(String[] args){
+
+        ArrayList<Tache> tab = Tache.randomNonCorrele(3);
+        Node racine = new Node(tab);
+        racine.printRecu();
+        System.out.println("nb Node : " + Node.nbNode);
+        System.exit(0);
+
         if (args.length!=1){
             System.err.println("Nombre d'arguments insuffisant");
             System.exit(1);
         }
-        File f = new File(args[0]);// 0 ?
+        File f = new File(args[0]);
         if(f == null){
             System.err.println("Chemin incorrect");
             System.exit(2);

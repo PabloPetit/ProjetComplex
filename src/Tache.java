@@ -3,6 +3,7 @@ import java.io.File;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,10 +22,10 @@ public class Tache {
         this.tempsB = tempsB;
         this.tempsC = tempsC;
     }
-    public Tache(int tempsA, int tempsB){
-        this.setTempsA(tempsA);
-        this.setTempsB(tempsB);
-        this.tempsC = 0;
+
+    @Override
+    public String toString(){
+       return "A : "+tempsA+" B : "+tempsB+" C : "+tempsC;
     }
 
     public int getTempsA() {
@@ -62,8 +63,33 @@ public class Tache {
         return numbers;
     }
 
-    public static ArrayList<Tache> randomGenTache(int size){
-            return null;
+    public static ArrayList<Tache> randomNonCorrele(int size) {
+        ArrayList<Tache> tab = new ArrayList<>();
+        for(int i = 0;i<size;i++){
+            tab.add(new Tache((int)(Math.random()*101),(int)(Math.random()*101),(int)(Math.random()*101)));
+        }
+        return tab;
+    }
+
+    public static ArrayList<Tache> randomCorreleExec(int size) {
+        ArrayList<Tache> tab = new ArrayList<>();
+        for(int i = 0;i<size;i++){
+            int r = (int)(Math.random()*5);
+            int min = 20 * r;
+            tab.add(new Tache((int)(min+Math.random()*21),(int)(min+Math.random()*21),(int)(min+Math.random()*21)));
+        }
+        return tab;
+    }
+
+    public static ArrayList<Tache> randomCorreleMachine(int size){
+        ArrayList<Tache> tab = new ArrayList<>();
+        for(int i = 0;i<size;i++){
+            int a = 1 + (int)(Math.random()*100);
+            int b = 16 + (int)(Math.random()*100);
+            int c = 31 + (int)(Math.random()*130);
+            tab.add(new Tache(a,b,c));
+        }
+        return tab;
     }
 
 
@@ -76,9 +102,10 @@ public class Tache {
             sc.nextLine();
             ArrayList<Integer> tabA = tabInt(sc.nextLine());
             ArrayList<Integer> tabB = tabInt(sc.nextLine());
+            ArrayList<Integer> tabC = tabInt(sc.nextLine());
             sc.close();
             for(int i=0;i<nbTache;i++){
-                tab.add(new Tache(tabA.get(i),tabB.get(i)));
+                tab.add(new Tache(tabA.get(i),tabB.get(i),tabC.get(i)));
             }
 
         }catch (FileNotFoundException e){
