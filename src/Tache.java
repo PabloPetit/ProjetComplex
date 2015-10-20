@@ -13,9 +13,9 @@ import java.util.regex.Pattern;
  */
 public class Tache {
 
-    private int tempsA;
-    private int tempsB;
-    private int tempsC;
+    int tempsA;
+    int tempsB;
+    int tempsC;
 
     public Tache(int tempsA, int tempsB, int tempsC){
         this.tempsA = tempsA;
@@ -28,29 +28,6 @@ public class Tache {
        return "A : "+tempsA+" B : "+tempsB+" C : "+tempsC;
     }
 
-    public int getTempsA() {
-        return tempsA;
-    }
-
-    public void setTempsA(int tempsA) {
-        this.tempsA = tempsA;
-    }
-
-    public int getTempsB() {
-        return tempsB;
-    }
-
-    public void setTempsB(int tempsB) {
-        this.tempsB = tempsB;
-    }
-
-    public int getTempsC() {
-        return tempsC;
-    }
-
-    public void setTempsC(int tempsC) {
-        this.tempsC = tempsC;
-    }
 
     public static ArrayList<Integer> tabInt(String line){
         ArrayList<Integer> numbers = new ArrayList<>();

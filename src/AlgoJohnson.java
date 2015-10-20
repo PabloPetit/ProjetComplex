@@ -6,15 +6,15 @@ import java.util.ArrayList;
 public class AlgoJohnson {
 
     public static int findMin(ArrayList<Tache> tab){
-        int min = Math.min(tab.get(0).getTempsA(),tab.get(0).getTempsB());
+        int min = Math.min(tab.get(0).tempsA,tab.get(0).tempsB);
         int indexMin = 0;
         for(int i = 1;i<tab.size();i++){
-            if(tab.get(i).getTempsA() < min){
-                min = tab.get(i).getTempsA();
+            if(tab.get(i).tempsA < min){
+                min = tab.get(i).tempsA;
                 indexMin = i;
             }
-            if(tab.get(i).getTempsB() < min){
-                min = tab.get(i).getTempsB();
+            if(tab.get(i).tempsB < min){
+                min = tab.get(i).tempsB;
                 indexMin = i;
             }
         }
@@ -31,7 +31,7 @@ public class AlgoJohnson {
 
         while(!tab.isEmpty()){
             int i = findMin(tab);
-            if(Math.min(tab.get(i).getTempsA(),tab.get(i).getTempsB())==tab.get(i).getTempsA()){
+            if(Math.min(tab.get(i).tempsA,tab.get(i).tempsB)==tab.get(i).tempsA){
                 gauche.add(tab.get(i));
             }else{
                 droite.add(tab.get(i));
