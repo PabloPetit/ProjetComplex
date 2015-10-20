@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c10d31b9-8999-4f4c-b484-64f0f669f760" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AlgoExact.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ProjetComplex/Complex.class" afterPath="$PROJECT_DIR$/out/production/ProjetComplex/Complex.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AlgoJohnson.java" afterPath="$PROJECT_DIR$/src/AlgoJohnson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Complex.java" afterPath="$PROJECT_DIR$/src/Complex.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Node.java" afterPath="$PROJECT_DIR$/src/Node.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Tache.java" afterPath="$PROJECT_DIR$/src/Tache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="c10d31b9-8999-4f4c-b484-64f0f669f760" name="Default" comment="" />
     <ignored path="ProjetComplex.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -73,8 +65,8 @@
       <file leaf-file-name="Node.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Node.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.98409545">
-              <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.7753479">
+              <caret line="48" column="49" selection-start-line="48" selection-start-column="49" selection-end-line="48" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -507,8 +499,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Node.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.98409545">
-          <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.7753479">
+          <caret line="48" column="49" selection-start-line="48" selection-start-column="49" selection-end-line="48" selection-end-column="49" />
           <folding />
         </state>
       </provider>
