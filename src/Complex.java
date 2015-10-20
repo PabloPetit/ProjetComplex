@@ -8,8 +8,8 @@ public class Complex {
 
     public static void main(String[] args){
 
-        int nb = 20;
-        int nbTache = 12;
+        int nb = 10;
+        int nbTache = 10;
         double totalTime = 0;
         for(int i=0;i<nb;i++){
             ArrayList<Tache> liste = Tache.randomCorreleExec(nbTache);

@@ -17,17 +17,17 @@ public class Node {
     }
 
 
-    public static Node nodeGen(AlgoExact algo,int borneType, ArrayList<Tache> fait,ArrayList<Tache> pasFait,int[] datePrev){
+    public static Node nodeGen(AlgoExact algo,int borneType, ArrayList<Tache> fait,ArrayList<Tache> pasFait){
         if(pasFait.isEmpty()){
             int date = calculDates(fait)[2];
             if(algo.borneMax == -1 || date<algo.borneMax){
                 algo.borneMax = date;
                 algo.res = fait;
+                return null;
             }
-            return null;
         }
 
-        Node r = new Node(algo,fait,new ArrayList<Node>(algo.nbTache-fait.size()));
+        Node r = new Node(algo,fait,new ArrayList<Node>());
 
         for(Tache t : pasFait){
             ArrayList<Tache> fait2 = (ArrayList<Tache>) fait.clone();
@@ -53,25 +53,12 @@ public class Node {
         return r;
     }
 
-    public static int[] calculDates2(ArrayList<Tache> liste){
-        int tA = 0, tB = 0, tC= 0;
-        for(Tache t : liste){
-            tA += t.tempsA;
-            tB = Math.max(tB + t.tempsB, tA + t.tempsB);
-            //tC =  Math.max(Math.max(tC + t.tempsC, tB + t.tempsC), tA + t.tempsC);
-            tC =  Math.max(tC + t.tempsC, tB + t.tempsC);// A verifier
-        }
-        return new int[]{tA,tB,tC};
-    }
-
-
     public static int[] calculDates(ArrayList<Tache> liste){
         int tA = 0, tB = 0, tC= 0;
         for(Tache t : liste){
             tA += t.tempsA;
             tB = Math.max(tB + t.tempsB, tA + t.tempsB);
-            //tC =  Math.max(Math.max(tC + t.tempsC, tB + t.tempsC), tA + t.tempsC);
-            tC =  Math.max(tC + t.tempsC, tB + t.tempsC);// A verifier
+            tC =  Math.max(Math.max(tC + t.tempsC, tB + t.tempsC), tA + t.tempsC);
         }
         return new int[]{tA,tB,tC};
     }
