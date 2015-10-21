@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Pablo on 07/10/2015.
@@ -23,15 +24,15 @@ public class AlgoJohnson {
 
 
     public static ArrayList<Tache> johnson(ArrayList<Tache> initial){
-        ArrayList<Tache> tab = new ArrayList<>();
-        for(Tache t : initial)tab.add(t);
-
+        Collections.sort(initial);
+        ArrayList<Tache> tab = (ArrayList<Tache>) initial.clone();
+        //Faut trier d'abord
         ArrayList<Tache> gauche = new ArrayList<>();
         ArrayList<Tache> droite = new ArrayList<>();
 
         while(!tab.isEmpty()){
             int i = findMin(tab);
-            if(Math.min(tab.get(i).tempsA,tab.get(i).tempsB)==tab.get(i).tempsA){
+            if(Math.min(tab.get(i).tempsA, tab.get(i).tempsB)==tab.get(i).tempsA){
                 gauche.add(tab.get(i));
             }else{
                 droite.add(tab.get(i));
@@ -39,6 +40,8 @@ public class AlgoJohnson {
             tab.remove(i);
         }
         gauche.addAll(droite);
+        tab.clear();
+        droite.clear();
         return gauche;
     }
 }

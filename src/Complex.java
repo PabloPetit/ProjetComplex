@@ -7,22 +7,24 @@ import java.util.ArrayList;
 public class Complex {
 
     public static void main(String[] args){
+        //Marche sur exemple sujet, sur instance.txt : 357
+        // 12 tache, 100 iterations, randomCorrelleExec : 3.57983
 
         int nb = 10;
-        int nbTache = 10;
+        int nbTache = 13; //10 taches : 0.08978 0.11441 0.09898  ||| 11 taches : 1.49376 1.43657  1.1699000000000002 renaud : 1.1712799999999999 0.82526
         double totalTime = 0;
         for(int i=0;i<nb;i++){
             ArrayList<Tache> liste = Tache.randomCorreleExec(nbTache);
             //ArrayList<Tache> liste = Tache.randomCorreleMachine(nbTache);
             //ArrayList<Tache> liste = Tache.randomNonCorrele(nbTache);
             AlgoExact algo = new AlgoExact(liste);
-            algo.run(AlgoExact.BORNE_B1);
+            algo.run(AlgoExact.BORNE_B1,true);
             totalTime+=algo.time;
-            System.gc();
+            //System.gc();
         }
         System.out.println("moyenne temps : " + totalTime / nb / 1000);
-        /*
 
+        /*
         if (args.length!=1){
             System.err.println("Nombre d'arguments insuffisant");
             System.exit(1);

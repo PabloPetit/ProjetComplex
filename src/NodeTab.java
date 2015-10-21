@@ -3,44 +3,51 @@ import java.util.ArrayList;
 /**
  * Created by Pablo on 11/10/2015.
  */
-public class Node {
+public class NodeTab {
 
-    ArrayList<Tache> taches;
+    Tache[] taches;
+    Node[] fils;
     AlgoExact algo;
 
-    public Node(AlgoExact algo, ArrayList<Tache> tache){
+    public NodeTab (AlgoExact algo, Tache[] tache,Node[] fils){
         this.algo = algo;
         this.taches = tache;
+        this.fils = fils;
         algo.nbNode++;
-
     }
 
 
-    public static Node nodeGen(AlgoExact algo,int borneType,boolean borneSup,ArrayList<Tache> fait,ArrayList<Tache> pasFait,int[]dates){
+    public static NodeTab nodeGen(AlgoExact algo,int borneType, Tache[] fait,Tache[] pasFait,int[]dates){
 
-        if(pasFait.isEmpty()){// On peut economiser un etage en regardant pasFait.size == 1
+        if(pasFait.length==0){
             int date = dates[2];
             if(algo.borneMax == -1 || date<algo.borneMax){
                 algo.borneMax = date;
-                algo.res = (ArrayList<Tache>) fait.clone();
+                ArrayList<Tache> res = new ArrayList<Tache>(algo.nbTache);
+                for(Tache t : fait)res.add(t);
+                algo.res = res;
                 return null;
             }
         }
 
-        Node r = new Node(algo,fait);
+        NodeTab r = new NodeTab(algo,fait,new Node[algo.nbTache]);
 
         for(Tache t : pasFait){
 
-            int [] dates2 = calculDates2(t,dates);
+            int [] dates2 = calculDates2(t, dates);
 
+            Tache[] fait2 = fait.clone();
+            addTab(fait2,t);
+            Tache[] pasFait2 = pasFait.clone();
+            removeTab(pasFait2,t);
+            /*
             ArrayList<Tache> fait2 = (ArrayList<Tache>) fait.clone();
             fait2.add(t);
             ArrayList<Tache> pasFait2 = (ArrayList<Tache>) pasFait.clone();
             pasFait2.remove(t);
-
+            */
             if(algo.borneMax==-1){
-                Node f = nodeGen(algo,borneType,borneSup,fait2,pasFait2,dates2);
-                if(f!=null)f.dispose();
+                addTab(r.fils,nodeGen(algo,borneType,fait2,pasFait2,dates2));
             }
             else{
                 int bInf=-1;
@@ -49,30 +56,31 @@ public class Node {
                         bInf = borneInfB1(dates2,pasFait2);
                         break;
                 }
-                if(!borneSup){
-                    if(bInf<algo.borneMax){
-                        Node f = nodeGen(algo,borneType,borneSup,fait2,pasFait2,dates2);
-                        if(f!=null)f.dispose();
-                    }
-                }else{
-                    ArrayList<Tache> tmp = (ArrayList<Tache>) fait2.clone();
-                    tmp.addAll(pasFait2);
-                    int bSup = calculDates(AlgoJohnson.johnson(tmp))[2];
-                    tmp.clear();
-                    if(bInf<bSup && bInf<algo.borneMax){
-                        Node f = nodeGen(algo,borneType,borneSup,fait2,pasFait2,dates2);
-                        if(f!=null)f.dispose();
-                    }
+                if(bInf<algo.borneMax){
+                    addTab(r.fils, nodeGen(algo, borneType, fait2, pasFait2, dates2));
                 }
             }
-            fait2.clear();
-            pasFait2.clear();
-            fait2=null;
-            pasFait2=null;
         }
-        //fait.clear();
-
         return r;
+    }
+    public static void removeTab(Object[] tab, Object o){
+        boolean removed = false;
+        for (int i =0;i<tab.length-1;i++){
+            if(tab[i]==o){
+                removed = true;
+            }
+            if(removed){
+                tab[i] = tab[i++];
+            }
+        }
+        if (removed)tab[tab.length-1]=null;
+    }
+
+    public static void addTab(Object[] tab, Object o){
+        for (int i =0;i<tab.length;i++){
+            if(tab[i]==null)tab[i]=o;
+            break;
+        }
     }
 
     public static int[] calculDates2(Tache t, int[] dates){
@@ -93,7 +101,7 @@ public class Node {
         return new int[]{tA,tB,tC};
     }
 
-    public static int borneInfB1(int[] dates, ArrayList<Tache> pasFait){
+    public static int borneInfB1(int[] dates, Tache[] pasFait){
         int[] d = dates;
         int dA = d[0], dB = d[1], dC = d[2];
         int eA = 0, eB = 0, eC = 0;
@@ -123,12 +131,6 @@ public class Node {
         dB = Math.max(dB,d[0]+minA) + eB + minC;
         dC = Math.max(Math.max(dC,d[1]+minB),d[0]+minAB) + eC;
         return Math.max(Math.max(dA,dB),dC);
-    }
-
-    public void dispose(){
-        this.taches.clear();
-        this.taches = null;
-        this.algo = null;
     }
 
 }

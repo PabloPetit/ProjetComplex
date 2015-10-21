@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Pablo on 07/10/2015.
  */
-public class Tache {
+public class Tache implements Comparable{
 
     int tempsA;
     int tempsB;
@@ -89,6 +89,13 @@ public class Tache {
             System.err.println("File not found");
             System.exit(3);
         }
+
         return  tab;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+
+        return 0;
     }
 }
