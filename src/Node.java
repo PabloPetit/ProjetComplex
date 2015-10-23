@@ -31,7 +31,7 @@ public class Node {
 
         for(Tache t : pasFait){
 
-            int [] dates2 = calculDates2(t,dates);
+            int [] dates2 = calculDates(t,dates);
 
             ArrayList<Tache> fait2 = (ArrayList<Tache>) fait.clone();
             fait2.add(t);
@@ -55,13 +55,17 @@ public class Node {
                         if(f!=null)f.dispose();
                     }
                 }else{
-                    ArrayList<Tache> tmp = (ArrayList<Tache>) fait2.clone();
-                    tmp.addAll(pasFait2);
-                    int bSup = calculDates(AlgoJohnson.johnson(tmp))[2];
+                    ArrayList<Tache> tmp = (ArrayList<Tache>) pasFait2.clone();
+                    tmp = AlgoJohnson.johnson(tmp);//
+                    int bSup = calculDates(tmp,dates2)[2];
+                   // System.out.println("BUP : "+bSup +" "+algo.borneMax);
                     tmp.clear();
-                    if(bInf<bSup && bInf<algo.borneMax){
-                        Node f = nodeGen(algo,borneType,borneSup,fait2,pasFait2,dates2);
-                        if(f!=null)f.dispose();
+
+                    if(bInf<algo.borneMax){ // ?
+                        if(bInf<=bSup) {
+                            Node f = nodeGen(algo, borneType, borneSup, fait2, pasFait2, dates2);
+                            if (f != null) f.dispose();
+                        }
                     }
                 }
             }
@@ -75,7 +79,17 @@ public class Node {
         return r;
     }
 
-    public static int[] calculDates2(Tache t, int[] dates){
+    public static int[] calculDates(ArrayList<Tache> liste,int[]dates){
+        int tA = dates[0], tB = dates[1], tC= dates[2];
+        for(Tache t : liste){
+            tA += t.tempsA;
+            tB = Math.max(tB + t.tempsB, tA + t.tempsB);
+            tC =  Math.max(Math.max(tC + t.tempsC, tB + t.tempsC), tA + t.tempsC);
+        }
+        return new int[]{tA,tB,tC};
+    }
+
+    public static int[] calculDates(Tache t, int[] dates){
         int tA = dates[0], tB = dates[1], tC= dates[2];
         tA += t.tempsA;
         tB = Math.max(tB + t.tempsB, tA + t.tempsB);

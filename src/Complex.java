@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Pablo on 07/10/2015.
@@ -7,11 +8,12 @@ import java.util.ArrayList;
 public class Complex {
 
     public static void main(String[] args){
+
         //Marche sur exemple sujet, sur instance.txt : 357
         // 12 tache, 100 iterations, randomCorrelleExec : 3.57983
 
-        int nb = 10;
-        int nbTache = 13; //10 taches : 0.08978 0.11441 0.09898  ||| 11 taches : 1.49376 1.43657  1.1699000000000002 renaud : 1.1712799999999999 0.82526
+        int nb = 50;
+        int nbTache = 11; //10 taches : 0.08978 0.11441 0.09898  ||| 11 taches : 1.49376 1.43657  1.1699000000000002 renaud : 1.1712799999999999 0.82526
         double totalTime = 0;
         for(int i=0;i<nb;i++){
             ArrayList<Tache> liste = Tache.randomCorreleExec(nbTache);
@@ -19,6 +21,18 @@ public class Complex {
             //ArrayList<Tache> liste = Tache.randomNonCorrele(nbTache);
             AlgoExact algo = new AlgoExact(liste);
             algo.run(AlgoExact.BORNE_B1,true);
+
+
+            AlgoExact algo2 = new AlgoExact(liste);
+            algo2.run(AlgoExact.BORNE_B1,false);
+
+            for(int j=0;j<nbTache;j++){
+                if(algo.res.get(j).compareTo(algo2.res.get(j))!=0){
+                    System.out.println("XXXXXXXXXXXXXX");
+                    break;
+                }
+            }
+            System.out.println("-------------");
             totalTime+=algo.time;
             //System.gc();
         }

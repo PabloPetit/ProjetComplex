@@ -95,7 +95,14 @@ public class Tache implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-
+        int a = ((Tache)o).tempsA;
+        int b = ((Tache)o).tempsB;
+        if(Math.min(a,b)<Math.min(tempsA,tempsB)){
+            return 1;
+        }
+        if(Math.min(a,b)>Math.min(tempsA,tempsB)){
+            return -1;
+        }
         return 0;
     }
 }

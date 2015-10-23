@@ -22,7 +22,28 @@ public class AlgoJohnson {
         return indexMin;
     }
 
+    public static ArrayList<Tache> johnson(ArrayList<Tache> initial){
+        ArrayList<Tache> tab = (ArrayList<Tache>) initial.clone();
+        Collections.sort(tab);
+        ArrayList<Tache> gauche = new ArrayList<>();
+        ArrayList<Tache> droite = new ArrayList<>();
 
+        for(int i = 0;i<tab.size();i++){
+            Tache min = tab.get(i);
+            if(min.tempsA<min.tempsB){
+                gauche.add(min);
+            }
+            else{
+                droite.add(min);
+            }
+        }
+        gauche.addAll(droite);
+        tab.clear();
+        droite.clear();
+        return gauche;
+    }
+
+    /*
     public static ArrayList<Tache> johnson(ArrayList<Tache> initial){
         Collections.sort(initial);
         ArrayList<Tache> tab = (ArrayList<Tache>) initial.clone();
@@ -44,4 +65,5 @@ public class AlgoJohnson {
         droite.clear();
         return gauche;
     }
+    */
 }
