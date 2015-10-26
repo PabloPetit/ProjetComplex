@@ -62,10 +62,14 @@ public class Node {
                     tmp.clear();
 
                     if(bInf<algo.borneMax){ // ?
-                        if(bInf<=bSup) {
+                        if(bSup<algo.borneMax){
                             Node f = nodeGen(algo, borneType, borneSup, fait2, pasFait2, dates2);
                             if (f != null) f.dispose();
                         }
+                        /*if(bInf<=bSup) {
+                            Node f = nodeGen(algo, borneType, borneSup, fait2, pasFait2, dates2);
+                            if (f != null) f.dispose();
+                        }*/
                     }
                 }
             }
@@ -99,6 +103,7 @@ public class Node {
 
     public static int[] calculDates(ArrayList<Tache> liste){
         int tA = 0, tB = 0, tC= 0;
+
         for(Tache t : liste){
             tA += t.tempsA;
             tB = Math.max(tB + t.tempsB, tA + t.tempsB);
@@ -106,6 +111,7 @@ public class Node {
         }
         return new int[]{tA,tB,tC};
     }
+
 
     public static int borneInfB1(int[] dates, ArrayList<Tache> pasFait){
         int[] d = dates;
@@ -137,6 +143,10 @@ public class Node {
         dB = Math.max(dB,d[0]+minA) + eB + minC;
         dC = Math.max(Math.max(dC,d[1]+minB),d[0]+minAB) + eC;
         return Math.max(Math.max(dA,dB),dC);
+    }
+
+    public static int borneInfB2(){
+        
     }
 
     public void dispose(){
