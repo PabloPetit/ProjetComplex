@@ -9,28 +9,34 @@ public class Complex {
 
 
     public static void testHeuristique(){
-        int nb=50;
-        int nbTache=11;
+        int nb=15;
+        int nbTache=100;
+        float tA1 = 0;
+        float tA2 = 0;
         for(int i=0;i<nb;i++) {
-            ArrayList<Tache> liste = Tache.randomCorreleExec(nbTache);
+            //ArrayList<Tache> liste = Tache.randomCorreleExec(nbTache);
             //ArrayList<Tache> liste = Tache.randomCorreleMachine(nbTache);
-            //ArrayList<Tache> liste = Tache.randomNonCorrele(nbTache);
+            ArrayList<Tache> liste = Tache.randomNonCorrele(nbTache);
 
             AlgoExact algo = new AlgoExact(liste);
             AlgoExact algo2 = new AlgoExact(liste);
 
-            algo.run(AlgoExact.BORNE_B1,false);
+            //algo.run(AlgoExact.BORNE_B1,false);
+            algo2.maxTime = 10;
             algo2.run(AlgoExact.BORNE_B1,true);
 
+            tA1+=algo.time;
+            tA2+=algo2.time;
             float gap = ((float)(algo2.datesFin[2] - algo.mBinf))/((float)algo.mBinf);
-            System.out.println("Gap : " + gap);
+            System.out.println("Gap : " + (int)(gap*100));
         }
 
-
+        System.out.println("TM1 : "+(tA1/nb/1000)+"  TM2 : "+(tA2/nbTache/1000));
     }
 
     public static void main(String[] args){
-
+       // AlgoExact algoB = new AlgoExact(Tache.tacheFromFile(new File("instance.txt")));
+       // algoB.run(AlgoExact.BORNE_B1,true);
         testHeuristique();
         System.exit(0);
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Pablo on 11/10/2015.
@@ -14,13 +15,28 @@ public class Node {
     }
 
 
-    public static Node nodeGen(AlgoExact algo,int borneType,boolean borneSup,ArrayList<Tache> fait,ArrayList<Tache> pasFait,int[]dates){
+    public static Node nodeGen(AlgoExact algo,ArrayList<Tache> fait,ArrayList<Tache> pasFait,int[]dates){
 
-        if(pasFait.isEmpty()){//
-            int date = dates[2];
-            if(algo.borneMax == -1 || date<algo.borneMax){
-                algo.borneMax = date;
-                algo.res = (ArrayList<Tache>) fait.clone();
+        if(algo.maxTime>0 && algo.nbNodeTime==AlgoExact.checkTime){ //Controle temps max
+            if(!algo.timeOk()){
+                algo.avorte = true;
+                return null;
+            }
+            else {
+                algo.nbNodeTime = 0;
+            }
+        }else {
+            algo.nbNodeTime++;
+        }
+
+        if(pasFait.size()==1){ // Controle feuille
+            int[] date = calculDates(pasFait.get(0),dates);
+            if(algo.borneMax == -1 || date[2]<algo.borneMax){
+                algo.borneMax = date[2];
+                algo.datesFin = date;
+                ArrayList tmp = (ArrayList<Tache>) fait.clone();
+                tmp.add(pasFait.get(0));
+                algo.res = tmp;
                 return null;
             }
         }
@@ -36,13 +52,14 @@ public class Node {
             ArrayList<Tache> pasFait2 = (ArrayList<Tache>) pasFait.clone();
             pasFait2.remove(t);
 
-            if(algo.borneMax==-1){
-                Node f = nodeGen(algo,borneType,borneSup,fait2,pasFait2,dates2);
+            if(algo.borneMax==-1){ // Pas encore de solution
+                Node f = nodeGen(algo,fait2,pasFait2,dates2);
                 if(f!=null)f.dispose();
             }
             else{
                 int bInf=-1;
-                switch (borneType){
+
+                switch (algo.borneType){
                     case AlgoExact.BORNE_B1:
                         bInf = borneInfB1(dates2,pasFait2);
                         break;
@@ -51,28 +68,43 @@ public class Node {
                         break;
                     case AlgoExact.BORNE_B3:
                         bInf = Math.max(Math.max(borneInfB1(dates2, pasFait2), borneInfB2(dates, pasFait2, t)),borneInfB3(dates,pasFait2,t));
+                        break;
                 }
-                if(bInf>algo.mBinf || algo.mBinf==-1)algo.mBinf=bInf;
-                if(!borneSup){
+
+                if(bInf<algo.mBinf || algo.mBinf==-1)algo.mBinf=bInf;
+
+                if(!algo.borneSup){
                     if(bInf<algo.borneMax){
-                        Node f = nodeGen(algo,borneType,borneSup,fait2,pasFait2,dates2);
+                        Node f = nodeGen(algo,fait2,pasFait2,dates2);
                         if(f!=null)f.dispose();
                     }
                 }else{
 
                     ArrayList<Tache> tmp = (ArrayList<Tache>) pasFait2.clone();
                     tmp = AlgoJohnson.johnson(tmp);//
-                    int bSup = calculDates(tmp,dates2)[2];
-                    tmp.clear();
-                    /*if(bSup<algo.borneMax){
-                        algo.borneMax = bSup;
+                    int[] bSup = calculDates(tmp,dates2);
+                    /*
+                    //Borne sup random :
+                    ArrayList<Tache> tmp = (ArrayList<Tache>)fait2.clone();
+                    ArrayList<Tache> tmp3 = (ArrayList<Tache>)pasFait2.clone();
+                    //Collections.shuffle(tmp3);
+                    tmp.addAll(tmp3);
+                    int[] bSup = calculDates(tmp,dates2);
+                    */
+                    if(bSup[2]<algo.borneMax){
+                        algo.borneMax = bSup[2];
+                        algo.datesFin = bSup;
                         ArrayList<Tache> tmp2 = (ArrayList<Tache>) fait2.clone();
                         tmp2.addAll(tmp);
                         algo.res = tmp2;
-                    }*/
+
+                        //algo.res=tmp3;
+                        tmp.clear();
+                    }
+                    //System.out.println("SUP : "+bSup+" MAX : "+algo.borneMax);
                     if(bInf<algo.borneMax){
-                        if(bSup<algo.borneMax){
-                            Node f = nodeGen(algo, borneType, borneSup, fait2, pasFait2, dates2);
+                        if(bSup[2]<algo.borneMax*2){
+                            Node f = nodeGen(algo,fait2, pasFait2, dates2);
                             if (f != null) f.dispose();
                         }
                     }
