@@ -5,12 +5,10 @@ import java.util.ArrayList;
  */
 public class Node {
 
-    ArrayList<Tache> taches;
     AlgoExact algo;
 
-    public Node(AlgoExact algo, ArrayList<Tache> tache){
+    public Node(AlgoExact algo){
         this.algo = algo;
-        this.taches = tache;
         algo.nbNode++;
 
     }
@@ -18,7 +16,7 @@ public class Node {
 
     public static Node nodeGen(AlgoExact algo,int borneType,boolean borneSup,ArrayList<Tache> fait,ArrayList<Tache> pasFait,int[]dates){
 
-        if(pasFait.isEmpty()){// On peut economiser un etage en regardant pasFait.size == 1
+        if(pasFait.isEmpty()){//
             int date = dates[2];
             if(algo.borneMax == -1 || date<algo.borneMax){
                 algo.borneMax = date;
@@ -27,7 +25,7 @@ public class Node {
             }
         }
 
-        Node r = new Node(algo,fait);
+        Node r = new Node(algo);
 
         for(Tache t : pasFait){
 
@@ -48,28 +46,35 @@ public class Node {
                     case AlgoExact.BORNE_B1:
                         bInf = borneInfB1(dates2,pasFait2);
                         break;
+                    case AlgoExact.BORNE_B2:
+                        bInf = borneInfB2(dates,pasFait2,t);
+                        break;
+                    case AlgoExact.BORNE_B3:
+                        bInf = Math.max(Math.max(borneInfB1(dates2, pasFait2), borneInfB2(dates, pasFait2, t)),borneInfB3(dates,pasFait2,t));
                 }
+                if(bInf>algo.mBinf || algo.mBinf==-1)algo.mBinf=bInf;
                 if(!borneSup){
                     if(bInf<algo.borneMax){
                         Node f = nodeGen(algo,borneType,borneSup,fait2,pasFait2,dates2);
                         if(f!=null)f.dispose();
                     }
                 }else{
+
                     ArrayList<Tache> tmp = (ArrayList<Tache>) pasFait2.clone();
                     tmp = AlgoJohnson.johnson(tmp);//
                     int bSup = calculDates(tmp,dates2)[2];
-                   // System.out.println("BUP : "+bSup +" "+algo.borneMax);
                     tmp.clear();
-
-                    if(bInf<algo.borneMax){ // ?
+                    /*if(bSup<algo.borneMax){
+                        algo.borneMax = bSup;
+                        ArrayList<Tache> tmp2 = (ArrayList<Tache>) fait2.clone();
+                        tmp2.addAll(tmp);
+                        algo.res = tmp2;
+                    }*/
+                    if(bInf<algo.borneMax){
                         if(bSup<algo.borneMax){
                             Node f = nodeGen(algo, borneType, borneSup, fait2, pasFait2, dates2);
                             if (f != null) f.dispose();
                         }
-                        /*if(bInf<=bSup) {
-                            Node f = nodeGen(algo, borneType, borneSup, fait2, pasFait2, dates2);
-                            if (f != null) f.dispose();
-                        }*/
                     }
                 }
             }
@@ -78,8 +83,7 @@ public class Node {
             fait2=null;
             pasFait2=null;
         }
-        //fait.clear();
-
+        fait.clear();
         return r;
     }
 
@@ -145,14 +149,47 @@ public class Node {
         return Math.max(Math.max(dA,dB),dC);
     }
 
-    public static int borneInfB2(){
-        
+    public static int borneInfB2(int[] dates, ArrayList<Tache> pasFait, Tache k){
+        int sommeA = 0, sommeC = 0;
+        for(Tache t : pasFait){
+            if(t.tempsA<=t.tempsC){
+                sommeA+=t.tempsA;
+            }
+            else {
+                sommeC+=t.tempsC;
+            }
+        }
+        return dates[0]+k.tempsA+k.tempsB+k.tempsC+sommeA+sommeC;
+    }
+
+    public static int borneInfB3(int[] dates, ArrayList<Tache> pasFait, Tache k){
+        int sommeB = 0, sommeC = 0;
+        for(Tache t : pasFait){
+            if(t.tempsB<=t.tempsC){
+                sommeB+=t.tempsB;
+            }
+            else {
+                sommeC+=t.tempsC;
+            }
+        }
+        return dates[1]+k.tempsB+k.tempsC+sommeB+sommeC;
     }
 
     public void dispose(){
-        this.taches.clear();
-        this.taches = null;
         this.algo = null;
+    }
+
+
+    public static int maxNode(int size){
+        int res = 1;
+        for(int i = size;i>= 1;i--){
+            int tmp = 1;
+            for (int j = size;j>=i;j--){
+                tmp*=j;
+            }
+            res+=tmp;
+        }
+        return res;
     }
 
 }

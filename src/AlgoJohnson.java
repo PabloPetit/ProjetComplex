@@ -6,22 +6,6 @@ import java.util.Collections;
  */
 public class AlgoJohnson {
 
-    public static int findMin(ArrayList<Tache> tab){
-        int min = Math.min(tab.get(0).tempsA,tab.get(0).tempsB);
-        int indexMin = 0;
-        for(int i = 1;i<tab.size();i++){
-            if(tab.get(i).tempsA < min){
-                min = tab.get(i).tempsA;
-                indexMin = i;
-            }
-            if(tab.get(i).tempsB < min){
-                min = tab.get(i).tempsB;
-                indexMin = i;
-            }
-        }
-        return indexMin;
-    }
-
     public static ArrayList<Tache> johnson(ArrayList<Tache> initial){
         ArrayList<Tache> tab = (ArrayList<Tache>) initial.clone();
         Collections.sort(tab);
@@ -64,6 +48,24 @@ public class AlgoJohnson {
         tab.clear();
         droite.clear();
         return gauche;
+    }
+    */
+
+    /*
+    public static int findMin(ArrayList<Tache> tab){
+        int min = Math.min(tab.get(0).tempsA,tab.get(0).tempsB);
+        int indexMin = 0;
+        for(int i = 1;i<tab.size();i++){
+            if(tab.get(i).tempsA < min){
+                min = tab.get(i).tempsA;
+                indexMin = i;
+            }
+            if(tab.get(i).tempsB < min){
+                min = tab.get(i).tempsB;
+                indexMin = i;
+            }
+        }
+        return indexMin;
     }
     */
 }

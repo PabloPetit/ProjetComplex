@@ -6,11 +6,14 @@ import java.util.ArrayList;
 public class AlgoExact {
 
     public static final int BORNE_B1 = 0;
+    public static final int BORNE_B2 = 1;
+    public static final int BORNE_B3 = 2;
 
     ArrayList<Tache> liste;
     ArrayList<Tache> res;
     boolean borneSup;
     int borneMax;
+    int mBinf=-1;
 
     double start;
     double time;
@@ -30,11 +33,14 @@ public class AlgoExact {
     }
 
     public ArrayList<Tache> run(int borneType,boolean borneSup) {
-        this.borneSup = borneSup;
-        //Tache[] l2 = new Tache[nbTache];
-        //for(int i = 0;i<nbTache;i++)l2[i]=liste.get(i);
         start = System.currentTimeMillis();
-        //NodeTab racine = NodeTab.nodeGen(this,borneType,new Tache[nbTache],l2,new int[]{0,0,0});
+        this.borneSup = borneSup;
+        if(this.borneSup){
+            borneSup = false;
+            ArrayList<Tache> tmp = AlgoJohnson.johnson(liste);
+            res = tmp;
+            borneMax = Node.calculDates(tmp)[2];
+        }
         Node racine = Node.nodeGen(this,borneType,borneSup,new ArrayList<Tache>(),liste,new int[]{0,0,0});
         time = System.currentTimeMillis()-start;
         datesFin = Node.calculDates(res);
