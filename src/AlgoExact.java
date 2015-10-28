@@ -56,7 +56,7 @@ public class AlgoExact {
         time = System.currentTimeMillis()-start;
         //datesFin = Node.calculDates(res);
 
-        System.out.println("Date Fin : "+datesFin[2]+" Time : "+(int)(time/1000)+":"+(int)(time%1000)+"sec Nodes : "+nbNode);
+        System.out.println("Taches : "+liste.size()+"Date Fin : "+datesFin[2]+" Time : "+(int)(time/1000)+":"+(int)(time%1000)+"sec Nodes : "+nbNode);
 
         return res;
     }
