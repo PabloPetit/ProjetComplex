@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c10d31b9-8999-4f4c-b484-64f0f669f760" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Complex.java" afterPath="$PROJECT_DIR$/src/Complex.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TestGraph.java" afterPath="$PROJECT_DIR$/src/TestGraph.java" />
     </list>
     <ignored path="ProjetComplex.iws" />
@@ -60,25 +59,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Complex.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Complex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Complex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2925532">
+            <state vertical-scroll-proportion="0.0">
               <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestGraph.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestGraph.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TestGraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="114" column="22" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.25531915">
+              <caret line="134" column="12" selection-start-line="134" selection-start-column="12" selection-end-line="134" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3778#3779#0" expanded="true" />
-                <element signature="e#3807#3808#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,8 +120,8 @@
         <option value="$PROJECT_DIR$/src/AlgoJohnson.java" />
         <option value="$PROJECT_DIR$/src/Node.java" />
         <option value="$PROJECT_DIR$/src/AlgoExact.java" />
-        <option value="$PROJECT_DIR$/src/TestGraph.java" />
         <option value="$PROJECT_DIR$/src/Complex.java" />
+        <option value="$PROJECT_DIR$/src/TestGraph.java" />
       </list>
     </option>
   </component>
@@ -713,6 +710,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Complex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AlgoExact.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -723,21 +728,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TestGraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="114" column="22" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.25531915">
+          <caret line="134" column="12" selection-start-line="134" selection-start-column="12" selection-end-line="134" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3778#3779#0" expanded="true" />
-            <element signature="e#3807#3808#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Complex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2925532">
-          <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
