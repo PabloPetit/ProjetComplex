@@ -37,7 +37,8 @@ public class Complex {
     public static void main(String[] args){
        // AlgoExact algoB = new AlgoExact(Tache.tacheFromFile(new File("instance.txt")));
        // algoB.run(AlgoExact.BORNE_B1,true);
-        testHeuristique();
+       // testHeuristique();
+        TestGraph.run();
         System.exit(0);
 
         //Marche sur exemple sujet, sur instance.txt : 357

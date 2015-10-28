@@ -28,7 +28,7 @@ public class TestGraph {
             pwncN = new PrintWriter(ncN);
             pwceT = new PrintWriter(ceT);
             pwceN = new PrintWriter(ceN);
-        
+
 
             int nbTache = 1;
             boolean aborted = false;
@@ -112,6 +112,6 @@ public class TestGraph {
     }
 
     public static void run(){
-
+        runExactSup();
     }
 }
