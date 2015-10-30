@@ -10,25 +10,25 @@ public class Complex {
 
     public static void testHeuristique(){
         int nb=15;
-        int nbTache=100;
+        int nbTache=10000;
         float tA1 = 0;
         float tA2 = 0;
         for(int i=0;i<nb;i++) {
             //ArrayList<Tache> liste = Tache.randomCorreleExec(nbTache);
-            //ArrayList<Tache> liste = Tache.randomCorreleMachine(nbTache);
-            ArrayList<Tache> liste = Tache.randomNonCorrele(nbTache);
+            ArrayList<Tache> liste = Tache.randomCorreleMachine(nbTache);
+            //ArrayList<Tache> liste = Tache.randomNonCorrele(nbTache);
 
             AlgoExact algo = new AlgoExact(liste);
             AlgoExact algo2 = new AlgoExact(liste);
 
             //algo.run(AlgoExact.BORNE_B1,false);
-            algo2.maxTime = 10;
+            algo2.maxTime = 120;
             algo2.run(AlgoExact.BORNE_B1,true);
 
             tA1+=algo.time;
             tA2+=algo2.time;
             float gap = ((float)(algo2.datesFin[2] - algo.mBinf))/((float)algo.mBinf);
-            System.out.println("Gap : " + (int)(gap*100));
+            //System.out.println("Gap : " + (int)(gap*100));
         }
 
         System.out.println("TM1 : "+(tA1/nb/1000)+"  TM2 : "+(tA2/nbTache/1000));
@@ -37,7 +37,7 @@ public class Complex {
     public static void main(String[] args){
        // AlgoExact algoB = new AlgoExact(Tache.tacheFromFile(new File("instance.txt")));
        // algoB.run(AlgoExact.BORNE_B1,true);
-       // testHeuristique();
+        //testHeuristique();
         TestGraph.run();
         System.exit(0);
 
@@ -71,58 +71,6 @@ public class Complex {
 
     }
 
-    public static final String helpMessage =
 
-            "Projet d'ordonnancement en COMPLEX 2015/16\n\nCatalina Assman - Pablo Petit\n\n\n" +
-            "Pour utiliser le programme, entrez en ligne de commande \nune des options suivantes : \n\n" +
-            "   -f <file> : pour calculer la date de fin d'un ordonnancement dans contenu dans un fichier\n" +
-            "   -R <type d'instance> <nombre de tâches>\n\n" +
-            "Option suplémentaires : \n\n" +
-            "   -b <type> : choisir le type de borne inférieur utilisé"+
-            "   -bSup : utiliser la borne supérieur"+
-            "   -v : mode verbeux, résulats détaillés\n" +
-            "   -s <out>: pour sauvegarder le résultats dans un fichier\n\n"+
-            "Types de borne : \n"+
-            "   - B1 : \n"+
-            "   - B2 : \n\n"+
-            "Type d'instance : \n" +
-            "   - NC : Non corrélées\n" +
-            "   - CM : Corrélées machines\n"+
-            "   - CE : Corrélées éxecution\n";
-
-    public static boolean v = false, bSup = false, s = false;
-    public static String path = null,borneType = null,random = null,nbTache = null;
-
-    public static void main2(String[] args) {
-        if (args.length == 0) {
-            System.out.println(helpMessage);
-            System.exit(0);
-        }
-        for (int i = 0; i < args.length; i++) {
-            if (args[i] == "-f" && i < args.length - 1) {
-                path = args[++i];
-            } else if (args[i] == "-R" && i < args.length - 2) {
-                if (path != null) {
-                    System.err.println("Vous ne pouvez pas utiliser -f et -R en même temps.");
-                    System.exit(1);
-                }
-                random = args[++i];
-                nbTache = args[++i];
-            } else if (args[i] == "-b" && i < args.length - 1) {
-                borneType = args[++i];
-            } else if (args[i] == "-bSup") {
-                bSup = true;
-            } else if (args[i] == "-v") {
-                v = true;
-            } else if (args[i] == "-s") {
-                s = true;
-            }
-        }
-
-        if(path != null){
-
-        }
-
-    }
 
 }

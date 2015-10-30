@@ -83,14 +83,7 @@ public class Node {
                     ArrayList<Tache> tmp = (ArrayList<Tache>) pasFait2.clone();
                     tmp = AlgoJohnson.johnson(tmp);//
                     int[] bSup = calculDates(tmp,dates2);
-                    /*
-                    //Borne sup random :
-                    ArrayList<Tache> tmp = (ArrayList<Tache>)fait2.clone();
-                    ArrayList<Tache> tmp3 = (ArrayList<Tache>)pasFait2.clone();
-                    //Collections.shuffle(tmp3);
-                    tmp.addAll(tmp3);
-                    int[] bSup = calculDates(tmp,dates2);
-                    */
+
                     if(bSup[2]<algo.borneMax){
                         algo.borneMax = bSup[2];
                         algo.datesFin = bSup;
@@ -98,10 +91,8 @@ public class Node {
                         tmp2.addAll(tmp);
                         algo.res = tmp2;
 
-                        //algo.res=tmp3;
                         tmp.clear();
                     }
-                    //System.out.println("SUP : "+bSup+" MAX : "+algo.borneMax);
                     if(bInf<algo.borneMax){
                         if(bSup[2]<algo.borneMax*2){
                             Node f = nodeGen(algo,fait2, pasFait2, dates2);
